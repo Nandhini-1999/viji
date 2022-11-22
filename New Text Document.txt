@@ -1,1 +1,37 @@
-Hii....
+<script>
+    let saveFile = () => {
+    	
+        // Get the data from each element on the form.
+    	const Techstack = document.getElementById('Techstack');
+        const Docker = document.getElementById('Docker');
+        const Sonarqube = document.getElementById('Sonarqube');
+        const GitUrl = document.getElementById('GitUrl');
+        const GitBranch = document.getElementById('GitBranch');
+        
+        // This variable stores all the data.
+        let data = 
+            '\r Techstack: ' + Techstack.value + ' \r\n ' + 
+            'Docker: ' +Docker.value + ' \r\n ' + 
+            'Sonarqube: ' +Sonarqube.value + ' \r\n ' + 
+            'GitUrl: ' + GitUrl.value + ' \r\n ' + 
+            'GitBranch: ' + GitBranch.value;
+        
+        // Convert the text to BLOB.
+        const textToBLOB = new Blob([data], { type: 'text/plain' });
+        const sFileName = 'formData.txt';	   // The file to save the data.
+
+        let newLink = document.createElement("a");
+        newLink.download = sFileName;
+
+        if (window.webkitURL != null) {
+            newLink.href = window.webkitURL.createObjectURL(textToBLOB);
+        }
+        else {
+            newLink.href = window.URL.createObjectURL(textToBLOB);
+            newLink.style.display = "none";
+            document.body.appendChild(newLink);
+        }
+
+        newLink.click(); 
+    }
+    </script>
